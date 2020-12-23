@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Todo } from '../model/todo';
 import { TodoService } from '../service/todo.service';
 
@@ -12,20 +13,21 @@ export class TodoListComponent implements OnInit {
   title: string;
   todoList: Todo[] = [];
 
-  constructor(private todoService: TodoService) {
+  constructor(private todoService: TodoService, private router: Router) {
     this.title = 'Todo List';
-    console.log('constructor');
    }
 
   ngOnInit(): void {
-    console.warn(`This is onInit error.`);
     this.loadAllTodoList();
   }
 
   loadAllTodoList(): void{
-    //const todoList = this.todoService.getAllTodos();
     this.todoList = this.todoService.getAllTodos();
     console.info(this.todoList);
+  }
+
+  onCLickDetail(id: number): void{
+    this.router.navigate(['todo', id, 'detail']);
   }
 
 }

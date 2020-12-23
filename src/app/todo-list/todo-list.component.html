@@ -1,22 +1,27 @@
 <h1> {{title}} </h1>
-
+<app-todo-add></app-todo-add>
+<br>
 <table>
     <thead>
         <tr>
+            <th>N&#176;</th>
             <th>Id</th>
             <th>Title</th>
             <th>Date</th>
             <th>Description</th>
             <th>Status</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of todoList">
+        <tr *ngFor="let item of todoList; let indice = index">
+            <td> {{indice+1}} </td>
             <td>{{item.id}} </td>
             <td>{{item.title}} </td>
             <td>{{item.date}} </td>
             <td>{{item.description}} </td>
             <td>{{item.status}} </td>
+            <td><button type="button" (click)="onCLickDetail(item.id)">Detail</button></td>
         </tr>
     </tbody>
 </table>

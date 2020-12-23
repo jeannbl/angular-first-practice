@@ -8,36 +8,48 @@ export class TodoService {
 
   public todos: Todo[] = [];
 
-  constructor() { }
+  constructor() { 
+    this.setAllTodos();
+  }
 
-  getAllTodos(): Todo[] {
+  setAllTodos(): void{
     let date = new Date();
-    let day =  date.getDate().toString().padStart(2, "0");
 
-    let todoListData: Todo[] = [
+    this.todos = [
       {
-        id:1,
+        id: Math.random(),
         title: 'Study Angular',
-        date:  date.getMonth()+1+'/'+day+'/'+date.getFullYear(),
+        date:  date,
         description: 'I need to study Angular fundamentals.',
         status: true
       },
       {
-        id:2,
+        id: Math.random(),
         title: 'Study TypeScript',
-        date: date.getMonth()+'/'+day+'/'+date.getUTCFullYear(),
+        date: date,
         description: 'I need to study TypeScript fundamentals.',
         status: true
       },
       {
-        id:3,
+        id: Math.random(),
         title: 'Study npm',
-        date: (date.getMonth()+1)+'/'+day+'/'+date.getFullYear(),
+        date: date,
         description: 'I need to study npm fundamentals.',
         status: false
       }
     ];
+  }
 
-    return todoListData;
+  getAllTodos(): Todo[] {
+    return this.todos;
+  }
+
+  getTodoById(id: number): Todo {
+    return ( this.todos.find(todoObject => (todoObject.id == id)) as Todo);
+  }
+
+  addTodoItem(todo: Todo): void{
+    this.todos.push(todo);
+    console.log("After add todo: "+this.todos);
   }
 }
